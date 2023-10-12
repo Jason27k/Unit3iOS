@@ -71,6 +71,10 @@ class TriviaController : UIViewController {
 
     func prepPage() {
         if currentIndex < questions.count {
+            var buttons = [secondOption, thirdOption, fourthOption, firstOption]
+            for button in buttons {
+                button?.isHidden = false
+            }
             let question = questions[currentIndex]
             var answerOptions = question.answerList
             answerOptions.append(question.correct)
@@ -82,7 +86,7 @@ class TriviaController : UIViewController {
                 firstOption?.isHidden = true
                 fourthOption?.isHidden = true
             } 
-            for (index, option) in [secondOption, thirdOption, fourthOption, firstOption].enumerated() {
+            for (index, option) in buttons.enumerated() {
                 if !(option?.isHidden ?? true) && index < answerOptions.count{
                     option?.setTitle(answerOptions[index].decodingHTMLEntities(), for: .normal)
                 }
