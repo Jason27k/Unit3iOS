@@ -6,12 +6,22 @@
 //
 import UIKit
 
-let firstQuestion = Question(titleFill: "Question 1/3", categoryFill: "Space", questionFull: "What was the first spaceship to carry human passengers?", first: "Vostok 1", second: "Apollo 11", third: "Sputnik 1", fourth: "Proton", correct: 1)
-let secondQuestion = Question(titleFill: "Question 2/3", categoryFill: "Chemistry", questionFull: "What chemical causes the burning taste after eating chillies?", first: "Piperine", second: "Capsicum", third: "Capsaicin", fourth: "Cayenne", correct: 3)
-let thirdQuestion = Question(titleFill: "Question 3/3", categoryFill: "Biology", questionFull: "What is the most common element in the human body?", first: "Carbon", second: "Oxygen", third: "Calcium", fourth: "Hydrogen", correct: 2)
-var questions = [firstQuestion, secondQuestion, thirdQuestion]
-var currentIndex = 0
-var answeredCorrect = 0;
+extension String {
+    func decodingHTMLEntities() -> String {
+        guard let data = self.data(using: .utf8) else { return self }
+
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+
+        if let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) {
+            return attributedString.string
+        } else {
+            return self
+        }
+    }
+}
 
 class TriviaController : UIViewController {
     
@@ -23,67 +33,75 @@ class TriviaController : UIViewController {
     @IBOutlet var thirdOption: UIButton?
     @IBOutlet var fourthOption: UIButton?
     
-    
+    var questions: [Question] = []
+    var currentIndex = 0
+    var answeredCorrect = 0;
     
     override func viewDidLoad() {
-        prepPage()
         super.viewDidLoad()
+        fetchTriviaQuestions()
     }
     
-    func prepPage() {
-        let f = questions[currentIndex]
-        titleLabel?.text = f.titleFill
-        categoryLabel?.text = f.categoryFill
-        questionLabel?.text = f.questionFull
-        firstOption?.setTitle(f.first, for: .normal)
-        secondOption?.setTitle(f.second, for: .normal)
-        thirdOption?.setTitle(f.third, for: .normal)
-        fourthOption?.setTitle(f.fourth, for: .normal)
+    func fetchTriviaQuestions() {
+        TriviaService.fetchTrivia {fetchedQuestions in
+            self.questions = fetchedQuestions
+                DispatchQueue.main.async {
+                    self.prepPage()
+                }
+            }
     }
     
-    @IBAction func tappedFirst() {
-        if questions[currentIndex].correct == 1 {
-            answeredCorrect += 1
+    @IBAction func tapped(_ sender: UIButton) {
+        if let selectedAnswer = sender.title(for: .normal) {
+            if questions[currentIndex].correct == selectedAnswer {
+                answeredCorrect += 1
+            }
         }
-        moveNext();
-    }
-    
-    @IBAction func tappedSecond() {
-        if questions[currentIndex].correct == 2 {
-            answeredCorrect += 1
-        }
-        moveNext();
-    }
-    
-    @IBAction func tappedThird() {
-        if questions[currentIndex].correct == 3 {
-            answeredCorrect += 1
-        }
-        moveNext();
-    }
-    
-    @IBAction func tappedFourth() {
-        if questions[currentIndex].correct == 4 {
-            answeredCorrect += 1
-        }
-        moveNext();
+        moveNext()
     }
     
     func moveNext() {
-        if currentIndex < 2 {
+        if currentIndex < questions.count - 1 {
             currentIndex += 1
             prepPage()
+        } else {
+            showQuizCompletionAlert()
         }
-        else {
-            let alertController = UIAlertController(title: "Quiz Completed", message: "You answered \(answeredCorrect) out of 3 questions correctly.", preferredStyle: .alert)
-            
-            let okAction = UIAlertAction(title: "Restart", style: .default) { (_) in
-                currentIndex = 0
-                answeredCorrect = 0
-                self.prepPage()
+    }
+
+    func prepPage() {
+        if currentIndex < questions.count {
+            let question = questions[currentIndex]
+            var answerOptions = question.answerList
+            answerOptions.append(question.correct)
+            answerOptions.shuffle()
+            titleLabel?.text = "Question: \(currentIndex + 1)/\(questions.count)"
+            categoryLabel?.text = question.categoryFill
+            questionLabel?.text = question.questionFull.decodingHTMLEntities()
+            if question.answerList.count == 1 {
+                firstOption?.isHidden = true
+                fourthOption?.isHidden = true
+            } 
+            for (index, option) in [secondOption, thirdOption, fourthOption, firstOption].enumerated() {
+                if !(option?.isHidden ?? true) && index < answerOptions.count{
+                    option?.setTitle(answerOptions[index].decodingHTMLEntities(), for: .normal)
+                }
             }
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
+        } else {
+            showQuizCompletionAlert()
         }
+    }
+
+    func showQuizCompletionAlert() {
+        let alertController = UIAlertController(title: "Quiz Completed", message: "You answered \(answeredCorrect) out of \(questions.count) questions correctly.", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Restart", style: .default) { (_) in
+            self.currentIndex = 0
+            self.answeredCorrect = 0
+            self.fetchTriviaQuestions()
+            self.prepPage()
+        }
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
 }

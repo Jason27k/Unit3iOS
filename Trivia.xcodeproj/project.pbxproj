@@ -17,6 +17,7 @@
 		9926AB4729DFAE1500860532 /* TriviaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9926AB4629DFAE1500860532 /* TriviaUITestsLaunchTests.swift */; };
 		FD893D332ACF5A9300896CB5 /* TriviaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD893D322ACF5A9300896CB5 /* TriviaController.swift */; };
 		FD893D352ACFB13600896CB5 /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD893D342ACFB13500896CB5 /* QuestionModel.swift */; };
+		FDCE8D9F2AD67261003A73A7 /* TriviaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCE8D9E2AD67261003A73A7 /* TriviaService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		9926AB4629DFAE1500860532 /* TriviaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FD893D322ACF5A9300896CB5 /* TriviaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaController.swift; sourceTree = "<group>"; };
 		FD893D342ACFB13500896CB5 /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
+		FDCE8D9E2AD67261003A73A7 /* TriviaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				9926AB2E29DFAE1400860532 /* LaunchScreen.storyboard */,
 				9926AB3129DFAE1400860532 /* Info.plist */,
 				FD893D342ACFB13500896CB5 /* QuestionModel.swift */,
+				FDCE8D9E2AD67261003A73A7 /* TriviaService.swift */,
 			);
 			path = Trivia;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9926AB2429DFAE1400860532 /* AppDelegate.swift in Sources */,
+				FDCE8D9F2AD67261003A73A7 /* TriviaService.swift in Sources */,
 				FD893D332ACF5A9300896CB5 /* TriviaController.swift in Sources */,
 				9926AB2629DFAE1400860532 /* SceneDelegate.swift in Sources */,
 				FD893D352ACFB13600896CB5 /* QuestionModel.swift in Sources */,

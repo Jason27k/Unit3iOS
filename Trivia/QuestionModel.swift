@@ -7,13 +7,17 @@
 
 import Foundation
 
-struct Question {
-    var titleFill: String
+struct Question : Codable {
     var categoryFill: String
     var questionFull: String
-    var first: String
-    var second: String
-    var third: String
-    var fourth: String
-    var correct: Int
+    var answerList: [String]
+    var correct: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case categoryFill = "category"
+        case questionFull = "question"
+        case answerList = "incorrect_answers"
+        case correct = "correct_answer"
+    }
 }
+

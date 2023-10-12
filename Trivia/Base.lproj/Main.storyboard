@@ -48,7 +48,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Button"/>
                                 <connections>
-                                    <action selector="tappedFirst" destination="dRz-59-dxX" eventType="touchUpInside" id="IEe-4B-kwy"/>
+                                    <action selector="tapped:" destination="dRz-59-dxX" eventType="touchUpInside" id="cwZ-6O-78U"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="pmO-MC-NPp">
@@ -57,7 +57,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Button"/>
                                 <connections>
-                                    <action selector="tappedSecond" destination="dRz-59-dxX" eventType="touchUpInside" id="KjT-UU-jMJ"/>
+                                    <action selector="tapped:" destination="dRz-59-dxX" eventType="touchUpInside" id="Y6L-j5-55l"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="gDS-K0-Q9k">
@@ -66,7 +66,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Button"/>
                                 <connections>
-                                    <action selector="tappedThird" destination="dRz-59-dxX" eventType="touchUpInside" id="tpi-8h-xdL"/>
+                                    <action selector="tapped:" destination="dRz-59-dxX" eventType="touchUpInside" id="tkx-rd-KHo"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="BdX-7o-WtM">
@@ -75,7 +75,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Button"/>
                                 <connections>
-                                    <action selector="tappedFourth" destination="dRz-59-dxX" eventType="touchUpInside" id="GdO-1n-1DZ"/>
+                                    <action selector="tapped:" destination="dRz-59-dxX" eventType="touchUpInside" id="Xpq-ri-oZ1"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -103,7 +103,7 @@
                         <outlet property="questionLabel" destination="dE0-5e-yNV" id="hdw-at-wQS"/>
                         <outlet property="secondOption" destination="pmO-MC-NPp" id="TKC-7d-hk7"/>
                         <outlet property="thirdOption" destination="gDS-K0-Q9k" id="sCx-3u-QWN"/>
-                        <outlet property="titleLabel" destination="WWp-61-nlN" id="7qj-z3-NZ4"/>
+                        <outlet property="titleLabel" destination="WWp-61-nlN" id="Muo-Cx-i0O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0tE-AE-K5q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
